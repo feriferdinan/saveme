@@ -1,0 +1,161 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "3a1947fbb332f74372cc6bff8d9afd7c",
+    "packages": [
+        {
+            "name": "ayesh/instagram-download",
+            "version": "v3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Ayesh/InstagramDownload.git",
+                "reference": "d4fd6e4617ba69d41745c2ce1b19c684eb54132a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Ayesh/InstagramDownload/zipball/d4fd6e4617ba69d41745c2ce1b19c684eb54132a",
+                "reference": "d4fd6e4617ba69d41745c2ce1b19c684eb54132a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.10.5",
+                "phpunit/phpunit": "^7.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ayesh\\InstagramDownload\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ayesh Karunaratne",
+                    "email": "ayesh@ayesh.me"
+                }
+            ],
+            "description": "Instagram image and video downloader with URL validation and cURL integration.",
+            "time": "2019-03-11T00:56:25+00:00"
+        },
+        {
+            "name": "chrisyue/php-m3u8",
+            "version": "3.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chrisyue/php-m3u8.git",
+                "reference": "9406659e72bb2c1cef07258474c7f35c3876f46b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chrisyue/php-m3u8/zipball/9406659e72bb2c1cef07258474c7f35c3876f46b",
+                "reference": "9406659e72bb2c1cef07258474c7f35c3876f46b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2",
+                "phpunit/phpunit": "^4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Chrisyue\\PhpM3u8\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "chrisyue",
+                    "email": "blizzchris@gmail.com",
+                    "homepage": "https://chrisyue.com"
+                }
+            ],
+            "description": "PHP M3U8 parser / dumper",
+            "homepage": "http://chrisyue.com",
+            "keywords": [
+                "dumper",
+                "m3u8",
+                "parser"
+            ],
+            "time": "2020-03-07T15:29:48+00:00"
+        },
+        {
+            "name": "rmccue/requests",
+            "version": "v1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rmccue/Requests.git",
+                "reference": "87932f52ffad70504d93f04f15690cf16a089546"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rmccue/Requests/zipball/87932f52ffad70504d93f04f15690cf16a089546",
+                "reference": "87932f52ffad70504d93f04f15690cf16a089546",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "require-dev": {
+                "requests/test-server": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Requests": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "ISC"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan McCue",
+                    "homepage": "http://ryanmccue.info"
+                }
+            ],
+            "description": "A HTTP library written in PHP, for human beings.",
+            "homepage": "http://github.com/rmccue/Requests",
+            "keywords": [
+                "curl",
+                "fsockopen",
+                "http",
+                "idna",
+                "ipv6",
+                "iri",
+                "sockets"
+            ],
+            "time": "2016-10-13T00:11:37+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
+}

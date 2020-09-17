@@ -1,0 +1,7 @@
+{
+    "require": {
+        "ayesh/instagram-download": "^3.0",
+        "rmccue/requests": "^1.7",
+        "chrisyue/php-m3u8": "^3.4"
+    }
+}
