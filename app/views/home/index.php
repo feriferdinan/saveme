@@ -145,11 +145,16 @@
       }
       $(".js-download").click(function(e) {
         e.preventDefault()
-        $(this).prop("disabled", true)
-        $(this).html("Loading...")
+
         $(".result-content").html("")
         let app = $("#app").val()
         let url = $("#url").val()
+        if (url.length == 0) {
+          errorContent("Link is required")
+          return
+        }
+        $(this).prop("disabled", true)
+        $(this).html("Loading...")
         $.post(`<?= BASEURL ?>home/download`, {
           app,
           url
