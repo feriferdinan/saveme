@@ -171,8 +171,8 @@
         }).fail(err => {
           $(this).prop("disabled", false)
           $(this).html("Download")
-          errorContent(err.message)
           console.log(err);
+          errorContent(err)
         })
       })
 
