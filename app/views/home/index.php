@@ -145,7 +145,7 @@
       }
       $(".js-download").click(function(e) {
         e.preventDefault()
-
+        errorContent("")
         $(".result-content").html("")
         let app = $("#app").val()
         let url = $("#url").val()
@@ -155,7 +155,6 @@
         }
         $(this).prop("disabled", true)
         $(this).html("Loading...")
-        errorContent("")
         $.post(`<?= BASEURL ?>home/download`, {
           app,
           url
