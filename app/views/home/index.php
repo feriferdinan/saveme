@@ -155,6 +155,7 @@
         }
         $(this).prop("disabled", true)
         $(this).html("Loading...")
+        errorContent("")
         $.post(`<?= BASEURL ?>home/download`, {
           app,
           url
