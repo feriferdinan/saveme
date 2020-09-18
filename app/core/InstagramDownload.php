@@ -69,7 +69,7 @@ class InstagramDownload
 
             return $this->download_url . '?dl=1';
         }
-        return $this->meta_values;
+        return $this->download_url;
     }
 
     /**
@@ -79,20 +79,18 @@ class InstagramDownload
     private function process(): void
     {
         $this->fetch($this->input_url);
-        // echo ($this->meta_values['og:video']);
-        // die;
         if (!\is_array($this->meta_values)) {
             throw new \RuntimeException('Error fetching information. Perhaps the post is private.1', 3);
         }
-        // if (!empty($this->meta_values['og:video'])) {
-        //     $this->type = 'video';
-        //     $this->download_url = $this->meta_values['og:video'];
-        // } elseif (!empty($this->meta_values['og:image'])) {
-        //     $this->type = 'image';
-        //     $this->download_url = $this->meta_values['og:image'];
-        // } else {
-        //     throw new \RuntimeException('Error fetching information. Perhaps the post is private.2', 4);
-        // }
+        if (!empty($this->meta_values['og:video'])) {
+            $this->type = 'video';
+            $this->download_url = $this->meta_values['og:video'];
+        } elseif (!empty($this->meta_values['og:image'])) {
+            $this->type = 'image';
+            $this->download_url = $this->meta_values['og:image'];
+        } else {
+            throw new \RuntimeException('Error fetching information. Perhaps the post is private.2', 4);
+        }
     }
 
     /**
@@ -141,6 +139,7 @@ class InstagramDownload
         \curl_setopt($curl, \CURLOPT_RETURNTRANSFER, true);
         \curl_setopt($curl, \CURLOPT_TIMEOUT, 1500);
 
+
         \curl_setopt($curl, \CURLOPT_USERAGENT,  "Mozilla/5.0 (Windows; U;   Windows NT 5.0; en-US; rv:1.7.12) Gecko/20050915 Firefox/1.0.7");
         // if (!empty($_SERVER['HTTP_USER_AGENT'])) {
         //     \curl_setopt($curl, \CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
@@ -153,7 +152,7 @@ class InstagramDownload
 
 
         if (!empty($response)) {
-            return $this->parse($response);
+            echo json_encode($this->parse($response));
         }
         throw new \RuntimeException('Could not fetch data.');
     }
