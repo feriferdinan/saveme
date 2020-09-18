@@ -18,7 +18,7 @@ class Home extends Controller
         require_once './app/core/InstagramDownload.php';
         try {
             $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:55.0) Gecko/20100101 Firefox/55.0';
-            $client = new InstagramDownload($url);
+            $client = new InstagramDownload("https://www.instagram.com/p/CFRVRkNFT0w/?utm_source=ig_web_copy_link");
             $url = $client->getDownloadUrl(); // Returns the download URL.
             $type = $client->getType(); // Returns "image" or "video" depending on the media type.
             $url_parsed = \parse_url($url);
