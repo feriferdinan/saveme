@@ -84,15 +84,15 @@ class InstagramDownload
         if (!\is_array($this->meta_values)) {
             throw new \RuntimeException('Error fetching information. Perhaps the post is private.1', 3);
         }
-        if (!empty($this->meta_values['og:video'])) {
-            $this->type = 'video';
-            $this->download_url = $this->meta_values['og:video'];
-        } elseif (!empty($this->meta_values['og:image'])) {
-            $this->type = 'image';
-            $this->download_url = $this->meta_values['og:image'];
-        } else {
-            throw new \RuntimeException('Error fetching information. Perhaps the post is private.2', 4);
-        }
+        // if (!empty($this->meta_values['og:video'])) {
+        //     $this->type = 'video';
+        //     $this->download_url = $this->meta_values['og:video'];
+        // } elseif (!empty($this->meta_values['og:image'])) {
+        //     $this->type = 'image';
+        //     $this->download_url = $this->meta_values['og:image'];
+        // } else {
+        //     throw new \RuntimeException('Error fetching information. Perhaps the post is private.2', 4);
+        // }
     }
 
     /**
