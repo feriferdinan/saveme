@@ -22,13 +22,13 @@ class Home extends Controller
         $url = $client->getDownloadUrl(); // Returns the download URL.
         $type = $client->getType(); // Returns "image" or "video" depending on the media type.
         $url_parsed = \parse_url($url);
-        return [
+        echo json_encode([
             "status" => true,
             "data" => $url,
             "host" => $url_parsed["host"],
             "type" => $type,
             "message" => $type,
-        ];
+        ]);
         // } catch (\InvalidArgumentException $exception) {
         //     return [
         //         "status" => false,
