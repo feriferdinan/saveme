@@ -35,10 +35,11 @@ class TwitterDownload
         if (!empty($headers)) {
             \curl_setopt($curl, \CURLOPT_HTTPHEADER, $headers);
         }
+        \curl_setopt($curl, \CURLOPT_USERAGENT,  "Mozilla/5.0 (Windows; U;   Windows NT 5.0; en-US; rv:1.7.12) Gecko/20050915 Firefox/1.0.7");
 
-        if (!empty($_SERVER['HTTP_USER_AGENT'])) {
-            \curl_setopt($curl, \CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
-        }
+        // if (!empty($_SERVER['HTTP_USER_AGENT'])) {
+        //     \curl_setopt($curl, \CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+        // }
 
         \curl_setopt($curl, \CURLOPT_SSL_VERIFYPEER, false);
 

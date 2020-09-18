@@ -139,9 +139,10 @@ class InstagramDownload
         \curl_setopt($curl, \CURLOPT_RETURNTRANSFER, true);
         \curl_setopt($curl, \CURLOPT_TIMEOUT, 15);
 
-        if (!empty($_SERVER['HTTP_USER_AGENT'])) {
-            \curl_setopt($curl, \CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
-        }
+        \curl_setopt($curl, \CURLOPT_USERAGENT,  "Mozilla/5.0 (Windows; U;   Windows NT 5.0; en-US; rv:1.7.12) Gecko/20050915 Firefox/1.0.7");
+        // if (!empty($_SERVER['HTTP_USER_AGENT'])) {
+        //     \curl_setopt($curl, \CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+        // }
 
         $response = \curl_exec($curl);
 
