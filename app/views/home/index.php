@@ -98,6 +98,7 @@
   <script src="<?= BASEURL ?>js/particle.js"></script>
   <script src="<?= BASEURL ?>js/jquery.animatedheadline.js"></script>
   <script src="<?= BASEURL ?>js/main.js"></script>
+  <script data-ad-client="ca-pub-6324963943019232" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
   <?php if (isset($data["js"])) foreach ($data["js"] as $key => $value) {
     $this->view($value);
