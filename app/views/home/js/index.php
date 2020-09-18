@@ -19,10 +19,12 @@
                 <div class="col-md-6 ">
                   <h2 class="mb-1" >Video SD</h2>
                   <video controls="" loop=""  src="${data.data.videoSD}" height="160"> Maaf, tampaknya ada yang tidak beres </video>
+                  <a download target"_blank" href="${data.data.videoSD}" class=" btn-outline-white px-5 py-3 ">Download Video</a>
                 </div>
                 <div class="col-md-6  ">
                   <h2 class="mb-1" >Video HD</h2>
                   <video controls="" loop=""  src="${data.data.videoHD}" height="160"> Maaf, tampaknya ada yang tidak beres </video>
+                  <a download target"_blank" href="${data.data.videoHD}" class=" btn-outline-white px-5 py-3 ">Download Video</a>
                 </div>
               </div>`
                     break;
@@ -30,9 +32,10 @@
                     if (data.type == "video") {
                         html = ` <div class="col-md-12  ">
                   <video controls="" loop=""  src="${data.data}" height="160"> Maaf, tampaknya ada yang tidak beres </video>
+                  <a download target"_blank" href="${data.data}" class=" btn-outline-white px-5 py-3 ">Download Video</a>
                 </div>`
                     } else {
-                        html = `<a download href="${data.data}" class="btn btn-primary btn-outline-white px-5 py-3 ">Download Image</a>`
+                        html = `<a download target"_blank" href="${data.data}" class="btn btn-primary btn-outline-white px-5 py-3 ">Download Image</a>`
                     }
                     break;
             }
