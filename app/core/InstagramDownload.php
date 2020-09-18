@@ -69,7 +69,7 @@ class InstagramDownload
 
             return $this->download_url . '?dl=1';
         }
-        return $this->download_url;
+        return $this->meta_values;
     }
 
     /**
