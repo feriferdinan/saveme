@@ -105,6 +105,7 @@ class InstagramDownload
         $url = \parse_url($url);
         if (empty($url['host'])) {
             echo ('Invalid URL');
+            echo $url;
         }
 
         $url['host'] = \strtolower($url['host']);
