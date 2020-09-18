@@ -79,7 +79,6 @@ class InstagramDownload
     private function process(): void
     {
         $this->fetch($this->input_url);
-        print_r($this->meta_values);
         if (!\is_array($this->meta_values)) {
             echo ('Error fetching information. Perhaps the post is private.');
         }
@@ -102,8 +101,7 @@ class InstagramDownload
      */
     private function validateUrl($url)
     {
-        // echo $url;
-        // die;
+
         $url = \parse_url($url);
         if (empty($url['host'])) {
             echo ('Invalid URL');
