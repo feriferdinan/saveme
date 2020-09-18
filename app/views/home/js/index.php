@@ -86,7 +86,7 @@
                 url
             }).done(resp => {
                 $(this).prop("disabled", false)
-                $(this).html("Download")
+                $(this).html("Generate Download Link")
                 let res = JSON.parse(resp)
                 console.log(res);
                 if (res.status) {
@@ -96,7 +96,7 @@
                 }
             }).fail(err => {
                 $(this).prop("disabled", false)
-                $(this).html("Download")
+                $(this).html("Generate Download Link")
                 console.log(err);
                 errorContent(err)
             })

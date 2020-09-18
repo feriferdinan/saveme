@@ -13,7 +13,7 @@ class Home extends Controller
         $this->view('templates/footer', $data);
     }
 
-    public function instagram($url)
+    public function instagram($url = "https://www.instagram.com/p/CFRVRkNFT0w/?utm_source=ig_web_copy_link")
     {
         require_once './app/core/InstagramDownload.php';
         try {

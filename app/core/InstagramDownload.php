@@ -79,8 +79,10 @@ class InstagramDownload
     private function process(): void
     {
         $this->fetch($this->input_url);
+        // echo ($this->meta_values['og:video']);
+        // die;
         if (!\is_array($this->meta_values)) {
-            throw new \RuntimeException('Error fetching information. Perhaps the post is private.', 3);
+            throw new \RuntimeException('Error fetching information. Perhaps the post is private.1', 3);
         }
         if (!empty($this->meta_values['og:video'])) {
             $this->type = 'video';
@@ -89,7 +91,7 @@ class InstagramDownload
             $this->type = 'image';
             $this->download_url = $this->meta_values['og:image'];
         } else {
-            throw new \RuntimeException('Error fetching information. Perhaps the post is private.', 4);
+            throw new \RuntimeException('Error fetching information. Perhaps the post is private.2', 4);
         }
     }
 
@@ -137,7 +139,7 @@ class InstagramDownload
         \curl_setopt($curl, \CURLOPT_FAILONERROR, true);
         \curl_setopt($curl, \CURLOPT_FOLLOWLOCATION, true);
         \curl_setopt($curl, \CURLOPT_RETURNTRANSFER, true);
-        \curl_setopt($curl, \CURLOPT_TIMEOUT, 15);
+        \curl_setopt($curl, \CURLOPT_TIMEOUT, 1500);
 
         \curl_setopt($curl, \CURLOPT_USERAGENT,  "Mozilla/5.0 (Windows; U;   Windows NT 5.0; en-US; rv:1.7.12) Gecko/20050915 Firefox/1.0.7");
         // if (!empty($_SERVER['HTTP_USER_AGENT'])) {
@@ -147,6 +149,7 @@ class InstagramDownload
         $response = \curl_exec($curl);
 
         \curl_close($curl);
+
 
 
         if (!empty($response)) {
