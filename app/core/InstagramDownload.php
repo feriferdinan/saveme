@@ -79,9 +79,8 @@ class InstagramDownload
     private function process(): void
     {
         $this->fetch($this->input_url);
-
         if (!\is_array($this->meta_values)) {
-            echo ('Error fetching information. Perhaps the post is private.1');
+            throw new \RuntimeException('Error fetching information. Perhaps the post is private.', 3);
         }
         if (!empty($this->meta_values['og:video'])) {
             $this->type = 'video';
@@ -90,7 +89,7 @@ class InstagramDownload
             $this->type = 'image';
             $this->download_url = $this->meta_values['og:image'];
         } else {
-            echo ('Error fetching information. Perhaps the post is private.2');
+            throw new \RuntimeException('Error fetching information. Perhaps the post is private.', 4);
         }
     }
 
@@ -102,20 +101,21 @@ class InstagramDownload
      */
     private function validateUrl($url)
     {
+        echo $url;
+        die;
         $url = \parse_url($url);
-        // if (empty($url['host'])) {
-        // echo ('Invalid URL');
-        print_r($url);
-        // }
+        if (empty($url['host'])) {
+            throw new \InvalidArgumentException('Invalid URL');
+        }
 
         $url['host'] = \strtolower($url['host']);
 
         if ($url['host'] !== self::INSTAGRAM_DOMAIN && $url['host'] !== 'www.' . self::INSTAGRAM_DOMAIN) {
-            echo ('Entered URL is not an ' . self::INSTAGRAM_DOMAIN . ' URL.');
+            throw new \InvalidArgumentException('Entered URL is not an ' . self::INSTAGRAM_DOMAIN . ' URL.');
         }
 
         if (empty($url['path'])) {
-            echo ('No image or video found in this URL');
+            throw new \InvalidArgumentException('No image or video found in this URL');
         }
 
         $args = \explode('/', $url['path']);
@@ -125,7 +125,7 @@ class InstagramDownload
             return $args[2];
         }
 
-        echo ('No image or video found in this URL');
+        throw new \InvalidArgumentException('No image or video found in this URL');
     }
 
     private function fetch($URI)
@@ -133,14 +133,13 @@ class InstagramDownload
         $curl = \curl_init($URI);
 
         if (!$curl) {
-            echo ('Unable to initialize curl.');
+            throw new \RuntimeException('Unable to initialize curl.', 12);
         }
 
         \curl_setopt($curl, \CURLOPT_FAILONERROR, true);
         \curl_setopt($curl, \CURLOPT_FOLLOWLOCATION, true);
         \curl_setopt($curl, \CURLOPT_RETURNTRANSFER, true);
-        \curl_setopt($curl, \CURLOPT_TIMEOUT, 1500);
-
+        \curl_setopt($curl, \CURLOPT_TIMEOUT, 15);
 
         \curl_setopt($curl, \CURLOPT_USERAGENT,  "Mozilla/5.0 (Windows; U;   Windows NT 5.0; en-US; rv:1.7.12) Gecko/20050915 Firefox/1.0.7");
         // if (!empty($_SERVER['HTTP_USER_AGENT'])) {
@@ -151,13 +150,11 @@ class InstagramDownload
 
         \curl_close($curl);
 
-        echo json_encode(["res" => $this->parse($response)]);
-        die;
 
         if (!empty($response)) {
             return $this->parse($response);
         }
-        echo ('Could not fetch data.');
+        throw new \RuntimeException('Could not fetch data.');
     }
 
     private function parse($HTML)
