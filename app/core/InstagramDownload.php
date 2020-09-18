@@ -103,10 +103,10 @@ class InstagramDownload
     private function validateUrl($url)
     {
         $url = \parse_url($url);
-        if (empty($url['host'])) {
-            echo ('Invalid URL');
-            echo $url;
-        }
+        // if (empty($url['host'])) {
+        // echo ('Invalid URL');
+        print_r($url);
+        // }
 
         $url['host'] = \strtolower($url['host']);
 
