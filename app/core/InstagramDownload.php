@@ -79,6 +79,7 @@ class InstagramDownload
     private function process(): void
     {
         $this->fetch($this->input_url);
+
         if (!\is_array($this->meta_values)) {
             throw new \RuntimeException('Error fetching information. Perhaps the post is private.1', 3);
         }
@@ -149,10 +150,11 @@ class InstagramDownload
 
         \curl_close($curl);
 
-
+        echo json_encode(["res" => $this->parse($response)]);
+        die;
 
         if (!empty($response)) {
-            echo json_encode($this->parse($response));
+            return $this->parse($response);
         }
         throw new \RuntimeException('Could not fetch data.');
     }
