@@ -9009,4 +9009,6 @@ textarea.form-control {
     .form-control::placeholder{
       color: #fff!important;
     }
-   
+    .cd-headline{
+      font-size: 3rem!important;
+    }

@@ -8,30 +8,16 @@
 
   <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,700,800" rel="stylesheet">
 
-  <link rel="stylesheet" href="<?= BASEURL ?>css/open-iconic-bootstrap.min.css">
   <link rel="stylesheet" href="<?= BASEURL ?>css/animate.css">
-
-  <link rel="stylesheet" href="<?= BASEURL ?>css/owl.carousel.min.css">
-  <link rel="stylesheet" href="<?= BASEURL ?>css/owl.theme.default.min.css">
-  <link rel="stylesheet" href="<?= BASEURL ?>css/magnific-popup.css">
-
-  <link rel="stylesheet" href="<?= BASEURL ?>css/aos.css">
-
-  <link rel="stylesheet" href="<?= BASEURL ?>css/ionicons.min.css">
-
-  <link rel="stylesheet" href="<?= BASEURL ?>css/bootstrap-datepicker.css">
-  <link rel="stylesheet" href="<?= BASEURL ?>css/jquery.timepicker.css">
-
-
-  <link rel="stylesheet" href="<?= BASEURL ?>css/flaticon.css">
-  <link rel="stylesheet" href="<?= BASEURL ?>css/icomoon.css">
+  <link rel="stylesheet" href="<?= BASEURL ?>css/styleheadline.css">
   <link rel="stylesheet" href="<?= BASEURL ?>css/style.css">
-  <?php if (isset($data["js"])) foreach ($data["js"] as $key => $value) {
-    $this->view($value);
-  } ?>
+
 </head>
 
 <body>
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+      <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+      <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
 
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
@@ -64,19 +50,28 @@
 
       <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
         <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-          <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Social Media</strong> Photo, Video, and IGTV Downloader</h1>
+          <h1 style="color:white" class="" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+            <span class="cd-headline clip">
+              <span class="cd-words-wrapper">
+                <b class="is-visible"><strong>Instagram</strong></b>
+                <b><strong>Facebook</strong></b>
+                <b><strong>Twitter</strong></b>
+              </span>
+            </span>
+          </h1>
+          <h3 data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" style="color:white" class="mb-4">Photo, Video, and IGTV Downloader</h3>
           <div class="col-md-12">
             <div class="form-group">
               <select class="form-control" id="app">
                 <option value="instagram">Instagram (Foto, Video, or IGTV)</option>
-                <option value="facebook">Facebook (Video only)</option>
-                <option disabled value="twitter">Twitter (Video only) comingsoon</option>
+                <option value="facebook">Facebook (Video)</option>
+                <option value="twitter">Twitter (Video) </option>
               </select>
             </div>
             <div class="form-group mb-3">
               <input id="url" placeholder="Link" class="form-control">
             </div>
-            <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><button class="btn btn-primary btn-outline-white px-5 py-3 js-download">Download</button></p>
+            <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><button class="btn btn-primary btn-outline-white px-5 py-3 js-download">Generate Download Link</button></p>
 
             <div class="error-content"></div>
             <div class="result-content">
@@ -94,90 +89,17 @@
 
   <script src="<?= BASEURL ?>js/jquery.min.js"></script>
   <script src="<?= BASEURL ?>js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="<?= BASEURL ?>js/popper.min.js"></script>
   <script src="<?= BASEURL ?>js/bootstrap.min.js"></script>
-  <script src="<?= BASEURL ?>js/jquery.easing.1.3.js"></script>
   <script src="<?= BASEURL ?>js/jquery.waypoints.min.js"></script>
-  <script src="<?= BASEURL ?>js/jquery.stellar.min.js"></script>
-  <script src="<?= BASEURL ?>js/owl.carousel.min.js"></script>
-  <script src="<?= BASEURL ?>js/jquery.magnific-popup.min.js"></script>
-  <script src="<?= BASEURL ?>js/aos.js"></script>
-  <script src="<?= BASEURL ?>js/jquery.animateNumber.min.js"></script>
-  <script src="<?= BASEURL ?>js/bootstrap-datepicker.js"></script>
   <script src="<?= BASEURL ?>js/particles.min.js"></script>
   <script src="<?= BASEURL ?>js/particle.js"></script>
-  <script src="<?= BASEURL ?>js/scrollax.min.js"></script>
+  <script src="<?= BASEURL ?>js/jquery.animatedheadline.js"></script>
   <script src="<?= BASEURL ?>js/main.js"></script>
 
+  <?php if (isset($data["js"])) foreach ($data["js"] as $key => $value) {
+    $this->view($value);
+  } ?>
 
-  <script>
-    $(document).ready(function() {
-
-      function showContent(app, data) {
-        html = ``
-        if (app == "facebook") {
-          html = ` <div class="row">
-                <div class="col-md-6 ">
-                  <h2 class="mb-1" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Video SD</h2>
-                  <video controls="" loop=""  src="${data.data.videoSD}" height="160"> Maaf, tampaknya ada yang tidak beres </video>
-                </div>
-                <div class="col-md-6  ">
-                  <h2 class="mb-1" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Video HD</h2>
-                  <video controls="" loop=""  src="${data.data.videoHD}" height="160"> Maaf, tampaknya ada yang tidak beres </video>
-                </div>
-              </div>`
-        } else {
-          if (data.type == "video") {
-            html = `<div class="col-md-12 ">
-                  <video controls="" loop=""  src="${data.data}" height="160"> Maaf, tampaknya ada yang tidak beres </video>
-                </div>`
-          } else {
-
-            html = `<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href="${data.data}" class="btn btn-primary btn-outline-white px-5 py-3 ">Download Image</a></p>`
-
-          }
-        }
-        $(".result-content").html(html)
-      }
-
-      function errorContent(message) {
-        $(".error-content").html(`<h2 class="mb-1" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">${message}</h2>`)
-      }
-      $(".js-download").click(function(e) {
-        e.preventDefault()
-        errorContent("")
-        $(".result-content").html("")
-        let app = $("#app").val()
-        let url = $("#url").val()
-        if (url.length == 0) {
-          errorContent("Link is required")
-          return
-        }
-        $(this).prop("disabled", true)
-        $(this).html("Loading...")
-        $.post(`<?= BASEURL ?>home/download`, {
-          app,
-          url
-        }).done(resp => {
-          $(this).prop("disabled", false)
-          $(this).html("Download")
-          let res = JSON.parse(resp)
-          console.log(res);
-          if (res.status) {
-            showContent(app, res)
-          } else {
-            errorContent(res.message)
-          }
-        }).fail(err => {
-          $(this).prop("disabled", false)
-          $(this).html("Download")
-          console.log(err);
-          errorContent(err)
-        })
-      })
-
-    });
-  </script>
 
 </body>
 

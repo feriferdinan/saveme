@@ -1,18 +1,12 @@
 <?php
-header('Access-Control-Allow-Origin: *');
 
-header('Access-Control-Allow-Methods: GET, POST');
 
-header("Access-Control-Allow-Headers: X-Requested-With");
-
-use Ayesh\InstagramDownload\InstagramDownload;
 
 class Home extends Controller
 {
     public function index()
     {
         $data['title'] = 'Save-Me';
-        $data['css'] = ['home/css/index'];
         $data['js'] = ['home/js/index'];
         $this->view('templates/header', $data);
         $this->view('home/index', $data);
@@ -21,7 +15,9 @@ class Home extends Controller
 
     public function instagram($url)
     {
+        require_once './app/core/InstagramDownload.php';
         try {
+            $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:55.0) Gecko/20100101 Firefox/55.0';
             $client = new InstagramDownload($url);
             $url = $client->getDownloadUrl(); // Returns the download URL.
             $type = $client->getType(); // Returns "image" or "video" depending on the media type.
@@ -46,16 +42,37 @@ class Home extends Controller
         }
     }
 
-    public function twitter($url = "")
+    public function twitter($url = "https://twitter.com/i/status/1306767468971646977")
     {
-        require_once './app/core/TwitterDownloader.php';
-        $t = new TwitterDownloader($url);
-        $result =  $t->download();
-        return [
-            "status" => true,
-            "data" => $result,
-            "message" => "Success",
-        ];
+        require_once './app/core/TwitterDownload.php';
+        try {
+            $t = new TwitterDownload();
+            $result =  $t->download($url);
+            if ($result) {
+                return [
+                    "status" => true,
+                    "type" => "video",
+                    "data" => [
+                        "videoSD" => $result["variants"][2]->url,
+                        "videoHD" => $result["variants"][3]->url,
+                    ],
+                    "message" => "Success",
+                ];
+            } else {
+                return [
+                    "status" => false,
+                    "data" => "",
+                    "message" => "Cannot Find Video ",
+                ];
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return [
+                "status" => false,
+                "data" => "",
+                "message" => "Link is not valid, Example: https://twitter.com/i/status/1306767468971646977",
+            ];
+        }
     }
 
     public function facebook_video($url)
@@ -94,6 +111,7 @@ class Home extends Controller
             ],
         ];
     }
+
 
     public function download()
     {
