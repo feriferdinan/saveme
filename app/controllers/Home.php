@@ -21,9 +21,11 @@ class Home extends Controller
             $client = new InstagramDownload($url);
             $url = $client->getDownloadUrl(); // Returns the download URL.
             $type = $client->getType(); // Returns "image" or "video" depending on the media type.
+            $url_parsed = \parse_url($url);
             return [
                 "status" => true,
                 "data" => $url,
+                "host" => $url_parsed["host"],
                 "type" => $type,
                 "message" => $type,
             ];
@@ -42,16 +44,25 @@ class Home extends Controller
         }
     }
 
+    public function instastory($username = "berlliana.lovell")
+    {
+        require_once './app/core/InstaStory.php';
+        $i = new InstaStory();
+        $i->getStory($username);
+    }
+
     public function twitter($url = "https://twitter.com/i/status/1306767468971646977")
     {
         require_once './app/core/TwitterDownload.php';
         try {
             $t = new TwitterDownload();
             $result =  $t->download($url);
-            if ($result) {
+            if (isset($result["variants"])) {
+                $url_parsed = \parse_url($url);
                 return [
                     "status" => true,
                     "type" => "video",
+                    "host" => $url_parsed["host"],
                     "data" => [
                         "videoSD" => $result["variants"][2]->url,
                         "videoHD" => $result["variants"][3]->url,
@@ -101,31 +112,45 @@ class Home extends Controller
             $matches = $matches[0];
             if ($matches && is_array($matches) && sizeof($matches) > 1) $videoSD = $matches[1];
         }
-        return [
-            "status" => true,
-            "type" => "video",
-            "message" => "Success",
-            "data" => [
-                "videoHD" => $videoHD,
-                "videoSD" => $videoSD,
-            ],
-        ];
+        $url_parsed = \parse_url($url);
+        if ($videoHD || $videoSD) {
+            return [
+                "status" => true,
+                "type" => "video",
+                "host" => $url_parsed["host"],
+                "message" => "Success",
+                "data" => [
+                    "videoHD" => $videoHD,
+                    "videoSD" => $videoSD,
+                ],
+            ];
+        } else {
+            return [
+                "status" => false,
+                "host" => $url_parsed["host"],
+                "message" => "Cannot Find Video",
+                "data" => "",
+            ];
+        }
     }
 
 
     public function download()
     {
         $url = $_POST["url"];
-        $app = $_POST["app"];
         $result = [];
-        switch ($app) {
-            case 'instagram':
+        $url_parsed = \parse_url($url);
+        switch ($url_parsed['host']) {
+            case 'instagram.com':
+            case 'www.instagram.com':
                 $result = $this->instagram($url);
                 break;
-            case 'twitter':
+            case 'twitter.com':
+            case 'www.twitter.com':
                 $result = $this->twitter($url);
                 break;
-            case 'facebook':
+            case 'facebook.com':
+            case 'www.facebook.com':
                 $result = $this->facebook_video($url);
                 break;
             default:

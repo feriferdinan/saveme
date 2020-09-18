@@ -61,20 +61,23 @@
           </h1>
           <h3 data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" style="color:white" class="mb-4">Photo, Video, and IGTV Downloader</h3>
           <div class="col-md-12">
-            <div class="form-group">
+            <!-- <div class="form-group">
               <select class="form-control" id="app">
                 <option value="instagram">Instagram (Foto, Video, or IGTV)</option>
                 <option value="facebook">Facebook (Video)</option>
                 <option value="twitter">Twitter (Video) </option>
               </select>
-            </div>
+            </div> -->
             <div class="form-group mb-3">
               <input id="url" placeholder="Link" class="form-control">
             </div>
             <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><button class="btn btn-primary btn-outline-white px-5 py-3 js-download">Generate Download Link</button></p>
 
             <div class="error-content"></div>
-            <div class="result-content">
+            <div class="result-content d-flex justify-content-center ">
+
+
+
 
             </div>
 

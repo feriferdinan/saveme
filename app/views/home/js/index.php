@@ -10,32 +10,57 @@
         };
         loader();
 
-        function showContent(app, data) {
+        function showContent(data) {
             html = ``
-            switch (app) {
-                case 'facebook':
-                case 'twitter':
-                    html = ` <div class="row">
-                <div class="col-md-6 ">
-                  <h2 class="mb-1" >Video SD</h2>
-                  <video controls="" loop=""  src="${data.data.videoSD}" height="160"> Maaf, tampaknya ada yang tidak beres </video>
-                  <a download target"_blank" href="${data.data.videoSD}" class=" btn-outline-white px-5 py-3 ">Download Video</a>
-                </div>
-                <div class="col-md-6  ">
-                  <h2 class="mb-1" >Video HD</h2>
-                  <video controls="" loop=""  src="${data.data.videoHD}" height="160"> Maaf, tampaknya ada yang tidak beres </video>
-                  <a download target"_blank" href="${data.data.videoHD}" class=" btn-outline-white px-5 py-3 ">Download Video</a>
-                </div>
-              </div>`
+            switch (data.host) {
+                case 'www.facebook.com':
+                case 'facebook.com':
+                case 'twitter.com':
+                case 'www.twitter.com':
+                    html += ` <div class="row">`
+                    if (data.data.videoSD.length !== 0) {
+                        html += `<div class="${data.data.videoSD.length == 0 || data.data.videoHD.length == 0 ? 'col-md-12':'col-md-6'}">
+                        <div class="card" style="width: 18rem;">
+                                        <video style="height:10rem" class="card-img-top" controls="" loop="" src="${data.data.videoSD}" > Maaf, tampaknya ada yang tidak beres </video>
+                                        <div class="card-body">
+                                        <h5 class="mb-1 card-title">Video SD</h5>
+                                        <a download target"_blank" href="${data.data.videoSD}" class="btn btn-primary ">Download Video</a>
+                                        </div>
+                                        </div>
+                                    </div>`
+                    }
+                    if (data.data.videoHD.length !== 0) {
+                        html += `<div class="${data.data.videoSD.length == 0 || data.data.videoHD.length == 0 ? 'col-md-12':'col-md-6'}">
+                        <div class="card" style="width: 18rem;">
+                                        <video style="height:10rem" class="card-img-top" controls="" loop="" src="${data.data.videoHD}" > Maaf, tampaknya ada yang tidak beres </video>
+                                        <div class="card-body">
+                                        <h5 class="mb-1 card-title">Video HD</h5>
+                                        <a download target"_blank" href="${data.data.videoHD}" class="btn btn-primary ">Download Video</a>
+                                        </div>
+                                        </div>
+                                    </div>`
+                    }
+                    html += `</div>`
+
+
                     break;
                 default:
                     if (data.type == "video") {
-                        html = ` <div class="col-md-12  ">
-                  <video controls="" loop=""  src="${data.data}" height="160"> Maaf, tampaknya ada yang tidak beres </video>
-                  <a download target"_blank" href="${data.data}" class=" btn-outline-white px-5 py-3 ">Download Video</a>
-                </div>`
+                        html += `   <div class="card" style="width: 18rem;">
+                                        <video style="height:10rem" class="card-img-top" controls="" loop="" src="${data.data}" > Maaf, tampaknya ada yang tidak beres </video>
+                                        <div class="card-body">
+                                        <a download target"_blank" href="${data.data}" class="btn btn-primary ">Download Video</a>
+                                        </div>
+                                    </div>`
                     } else {
-                        html = `<a download target"_blank" href="${data.data}" class="btn btn-primary btn-outline-white px-5 py-3 ">Download Image</a>`
+                        html = `
+                        <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="${data.data}" alt="Card image cap">
+                                        <div class="card-body">
+                                        <a download target"_blank" href="${data.data}" class="btn btn-primary ">Download Image</a>
+                                        </div>
+                                    </div>`
+
                     }
                     break;
             }
@@ -43,11 +68,11 @@
         }
 
         function errorContent(message) {
-            $(".error-content").html(`<h2 class="mb-1" >${message}</h2>`)
+            $(".error-content").html(`<h2 class="mb-1"> ${message} </h2>`)
         }
         $(".js-download").click(function(e) {
             e.preventDefault()
-            errorContent("")
+            $(".error-content").html(``)
             $(".result-content").html("")
             let app = $("#app").val()
             let url = $("#url").val()
@@ -58,7 +83,6 @@
             $(this).prop("disabled", true)
             $(this).html("Loading...")
             $.post(`<?= BASEURL ?>home/download`, {
-                app,
                 url
             }).done(resp => {
                 $(this).prop("disabled", false)
@@ -66,7 +90,7 @@
                 let res = JSON.parse(resp)
                 console.log(res);
                 if (res.status) {
-                    showContent(app, res)
+                    showContent(res)
                 } else {
                     errorContent(res.message)
                 }
