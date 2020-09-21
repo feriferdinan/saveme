@@ -135,10 +135,10 @@ class InstagramDownload
             throw new \RuntimeException('Unable to initialize curl.', 12);
         }
 
-        \curl_setopt($curl, \CURLOPT_FAILONERROR, true);
-        \curl_setopt($curl, \CURLOPT_FOLLOWLOCATION, true);
-        \curl_setopt($curl, \CURLOPT_RETURNTRANSFER, true);
-        \curl_setopt($curl, \CURLOPT_TIMEOUT, 15);
+        curl_setopt($curl, CURLOPT_POST, false);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         \curl_setopt($curl, \CURLOPT_USERAGENT,  "Mozilla/5.0 (Windows; U;   Windows NT 5.0; en-US; rv:1.7.12) Gecko/20050915 Firefox/1.0.7");
         // if (!empty($_SERVER['HTTP_USER_AGENT'])) {
