@@ -17,17 +17,32 @@ class Home extends Controller
         $this->view('templates/footer', $data);
     }
 
-    private function instagram($url = "https://www.facebook.com/watch/?v=3177349105706517&extid=YdaVVNoj809o5Ae4")
+    private function instagram($url = "https://www.instagram.com/p/CFZEwgDAJ5m/?utm_source=ig_web_copy_link")
     {
         try {
-            $HTML = $this->fetch($url);
-            $parsed = $this->parse_meta($HTML);
-            $res = $this->process_meta($parsed);
+            $HTML = $this->fetch("https://downloadgram.com/process.php", [], [
+                'url' => $url,
+                'build_id' => 'pP9dGaOIBQAYnzkjFPfiGKjkAwNjAwp0ZGH5sQZ2YwpjYwV0AP4kBGZ=',
+                'build_key' => '00d6cfccae54615277bb09512077699ca46d52e6915fc271db7a1d1d303e9d24'
+            ]);
+            preg_match_all('/<a href="(.+)" class="button" target="_blank">/', $HTML, $link);
+            $url = parse_url($link[1][0]);
+            $pathinfo = pathinfo($url["path"]);
+            $type = 'image';
+            if ($pathinfo['extension'] == 'mp4') $type = 'video';
+            // $res = $this->process_meta($parsed);
+            if ($link[1][0]) {
+                return [
+                    "status" => true,
+                    "data" => $link[1][0],
+                    "type" => $type,
+                    "message" => $type,
+                ];
+            }
             return [
-                "status" => true,
-                "data" => $res["download_url"],
-                "type" => $res["type"],
-                "message" => $res["type"],
+                "status" => false,
+                "data" => "",
+                "message" => "Cannot find image or video, perhaps the post is private",
             ];
         } catch (\InvalidArgumentException $exception) {
             return [

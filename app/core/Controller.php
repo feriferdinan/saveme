@@ -38,7 +38,7 @@ class Controller
         curl_close($ch);
         return $status;
     }
-    public function fetch(string $url, array $headers = []): string
+    public function fetch(string $url, array $headers = [], $data = []): string
     {
         $curl = \curl_init($url);
 
@@ -53,6 +53,12 @@ class Controller
 
         if (!empty($headers)) {
             \curl_setopt($curl, \CURLOPT_HTTPHEADER, $headers);
+        }
+        if ($data) {
+            \curl_setopt_array($curl, array(
+                CURLOPT_POST => 1,
+                CURLOPT_POSTFIELDS => $data
+            ));
         }
         \curl_setopt($curl, \CURLOPT_USERAGENT,  "Mozilla/5.0 (Windows; U;   Windows NT 5.0; en-US; rv:1.7.12) Gecko/20050915 Firefox/1.0.7");
 
