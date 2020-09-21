@@ -17,9 +17,10 @@
                 case 'facebook.com':
                 case 'twitter.com':
                 case 'www.twitter.com':
-                    html += ` <div class="row">`
-                    if (data.data.videoSD.length !== 0) {
-                        html += `<div class="${data.data.videoSD.length == 0 || data.data.videoHD.length == 0 ? 'col-md-12':'col-md-6'}">
+                    if (data.type == "video") {
+                        html += ` <div class="row">`
+                        if (data.data.videoSD.length !== 0) {
+                            html += `<div class="${data.data.videoSD.length == 0 || data.data.videoHD.length == 0 ? 'col-md-12':'col-md-6'}">
                         <div class="card" style="width: 18rem;">
                                         <video style="height:10rem" class="card-img-top" controls="" loop="" src="${data.data.videoSD}" > Maaf, tampaknya ada yang tidak beres </video>
                                         <div class="card-body">
@@ -28,9 +29,9 @@
                                         </div>
                                         </div>
                                     </div>`
-                    }
-                    if (data.data.videoHD.length !== 0) {
-                        html += `<div class="${data.data.videoSD.length == 0 || data.data.videoHD.length == 0 ? 'col-md-12':'col-md-6'}">
+                        }
+                        if (data.data.videoHD.length !== 0) {
+                            html += `<div class="${data.data.videoSD.length == 0 || data.data.videoHD.length == 0 ? 'col-md-12':'col-md-6'}">
                         <div class="card" style="width: 18rem;">
                                         <video style="height:10rem" class="card-img-top" controls="" loop="" src="${data.data.videoHD}" > Maaf, tampaknya ada yang tidak beres </video>
                                         <div class="card-body">
@@ -39,8 +40,17 @@
                                         </div>
                                         </div>
                                     </div>`
+                        }
+                        html += `</div>`
+                    } else {
+                        html = `
+                        <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="${data.data}" alt="Card image cap">
+                                        <div class="card-body">
+                                        <a download target"_blank" href="${data.data}" class="btn btn-primary ">Download Image</a>
+                                        </div>
+                                    </div>`
                     }
-                    html += `</div>`
 
 
                     break;
