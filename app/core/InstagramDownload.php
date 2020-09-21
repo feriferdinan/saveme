@@ -162,30 +162,32 @@ class InstagramDownload
         $this->meta_values = [];
 
         \preg_match_all('/<meta[^>]+="([^"]*)"[^>]' . '+content="([^"]*)"[^>]+>/i', $HTML, $raw_tags);
+        $this->meta_values = $raw_tags;
+        echo json_encode($this->meta_values);
+        die;
+        // if (!empty($raw_tags)) {
+        //     $multi_value_tags = \array_unique(\array_diff_assoc($raw_tags[1], \array_unique($raw_tags[1])));
+        //     foreach ($raw_tags[1] as $i => $tag) {
+        //         $has_multiple_values = false;
 
-        if (!empty($raw_tags)) {
-            $multi_value_tags = \array_unique(\array_diff_assoc($raw_tags[1], \array_unique($raw_tags[1])));
-            foreach ($raw_tags[1] as $i => $tag) {
-                $has_multiple_values = false;
 
+        //         foreach ($multi_value_tags as $multi_tag) {
+        //             if ($tag === $multi_tag) {
+        //                 $has_multiple_values = true;
+        //             }
+        //         }
 
-                foreach ($multi_value_tags as $multi_tag) {
-                    if ($tag === $multi_tag) {
-                        $has_multiple_values = true;
-                    }
-                }
+        //         if ($has_multiple_values) {
+        //             $this->meta_values[$tag][] = $raw_tags[2][$i];
+        //         } else {
+        //             $this->meta_values[$tag] = $raw_tags[2][$i];
+        //         }
+        //     }
+        // }
 
-                if ($has_multiple_values) {
-                    $this->meta_values[$tag][] = $raw_tags[2][$i];
-                } else {
-                    $this->meta_values[$tag] = $raw_tags[2][$i];
-                }
-            }
-        }
-
-        if (empty($this->meta_values)) {
-            return false;
-        }
+        // if (empty($this->meta_values)) {
+        //     return false;
+        // }
 
         return $this->meta_values;
     }
