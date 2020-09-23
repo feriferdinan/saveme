@@ -45,7 +45,7 @@
                     } else {
                         html = `
                         <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="${data.data}" alt="Card image cap">
+                                <img class="card-img-top" style="height:200px" src="${data.data}" alt="Card image cap">
                                         <div class="card-body">
                                         <a download target"_blank" href="${data.data}" class="btn btn-primary ">Download Image</a>
                                         </div>
@@ -65,7 +65,7 @@
                     } else {
                         html = `
                         <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="${data.data}" alt="Card image cap">
+                                <img class="card-img-top" style="height:200px" src="${data.data}" alt="Card image cap">
                                         <div class="card-body">
                                         <a download target"_blank" href="${data.data}" class="btn btn-primary ">Download Image</a>
                                         </div>
@@ -98,7 +98,6 @@
                 $(this).prop("disabled", false)
                 $(this).html("Generate Download Link")
                 let res = JSON.parse(resp)
-                console.log(res);
                 if (res.status) {
                     showContent(res)
                 } else {

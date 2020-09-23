@@ -21,7 +21,19 @@ class Home extends Controller
     {
         try {
             $the_url = explode("?", $url)[0];
-            $res = $this->fetch($the_url . '?__a=1');
+            $header[0]  = "Accept: text/xml,application/xml,application/xhtml+xml,";
+            $header[0] .= "text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5";
+            $ip  = '36.86.63.182';
+            $header[] = "Cache-Control: max-age=0";
+            $header[] = "Connection: keep-alive";
+            $header[] = "Keep-Alive: 300";
+            $header[] = "Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7";
+            $header[] = "Accept-Language: en-us,en;q=0.5";
+            $header[] = "Pragma: "; // browsers = blank
+            // $header[] = "X_FORWARDED_FOR: " . $ip;
+            // $header[] = "REMOTE_ADDR: " . $ip;
+            // $header[] = "Host: https://save-me.herokuapp.com/";
+            $res = $this->fetch($the_url . '?__a=1', $header);
             $res_json = json_decode($res);
             $data = [];
             if ($res_json->graphql->shortcode_media->is_video) {
