@@ -1,4 +1,4 @@
-# SocialMediaDownloader - [IG,FB, Twitter photo and Video Downloader](http://saveme.epizy.com/)  
+# SAVEME - [IG,FB, Twitter photo and Video Downloader](http://saveme.epizy.com/)  
 
 ### Requirements
 * PHP 7.4
